@@ -32,6 +32,7 @@ extra["springCloudVersion"] = "2021.0.5"
 extra["testcontainersVersion"] = "1.17.6"
 
 dependencies {
+	implementation("com.github.f4b6a3:ulid-creator:5.1.0")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
