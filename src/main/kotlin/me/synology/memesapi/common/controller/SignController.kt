@@ -1,6 +1,6 @@
 package me.synology.memesapi.common.controller
 
-import me.synology.memesapi.common.dto.SignupRequestDto
+import me.synology.memesapi.common.dto.SignUpRequestDto
 import me.synology.memesapi.common.model.response.CommonResult
 import me.synology.memesapi.common.service.ResponseService
 import me.synology.memesapi.common.service.sign.SignService
@@ -18,9 +18,9 @@ class SignController(
     private val responseService: ResponseService) {
 
     @PostMapping("/signUp")
-    fun signIn(@Validated @RequestBody signupRequestDto: SignupRequestDto) :
+    fun signUp(@Validated @RequestBody signUpRequestDto: SignUpRequestDto) :
             ResponseEntity<CommonResult> {
-        signService.signUp(signupRequestDto)
+        signService.signUp(signUpRequestDto)
         return ResponseEntity.ok()
             .body(responseService.successResult())
     }
