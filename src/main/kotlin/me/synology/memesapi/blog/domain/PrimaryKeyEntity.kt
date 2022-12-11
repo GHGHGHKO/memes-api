@@ -1,4 +1,4 @@
-package me.synology.memesapi.domain
+package me.synology.memesapi.blog.domain
 
 import com.github.f4b6a3.ulid.UlidCreator
 import org.hibernate.proxy.HibernateProxy

@@ -1,9 +1,9 @@
 package me.synology.memesapi
 
-import me.synology.memesapi.domain.Board
-import me.synology.memesapi.domain.BoardInformation
-import me.synology.memesapi.domain.User
-import me.synology.memesapi.repository.BoardRepository
+import me.synology.memesapi.blog.domain.Board
+import me.synology.memesapi.blog.domain.BoardInformation
+import me.synology.memesapi.blog.domain.User
+import me.synology.memesapi.blog.repository.BoardRepository
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

@@ -1,4 +1,4 @@
-package me.synology.memesapi.domain
+package me.synology.memesapi.blog.domain
 
 import javax.persistence.Column
 import javax.persistence.Entity

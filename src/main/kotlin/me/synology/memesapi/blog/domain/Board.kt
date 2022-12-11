@@ -1,4 +1,4 @@
-package me.synology.memesapi.domain
+package me.synology.memesapi.blog.domain
 
 import java.time.LocalDateTime
 import java.util.UUID
