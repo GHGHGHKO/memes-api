@@ -51,6 +51,16 @@ class ExceptionAdvice(
                 getMessage("existingUser.message")))
     }
 
+    @ExceptionHandler(value = [EmailSignInFailedExceptionCustom::class])
+    @ResponseBody
+    fun emailSignInFailed(): ResponseEntity<CommonResult> {
+        return ResponseEntity
+            .status(HttpStatus.UNAUTHORIZED)
+            .body(responseService.failResult(
+                getMessage("emailSignInFailed.code").toInt(),
+                getMessage("emailSignInFailed.message")))
+    }
+
     private fun getMessage(code: String): String {
         return messageSource.getMessage(code, null, LocaleContextHolder.getLocale())
     }

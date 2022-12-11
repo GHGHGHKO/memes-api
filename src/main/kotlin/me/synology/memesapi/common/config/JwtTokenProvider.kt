@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest
 
 import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
+import me.synology.memesapi.common.dto.jwt.TokenResponseDto
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Component
 import java.security.Key
@@ -19,17 +20,20 @@ class JwtTokenProvider(
 
     var secretKey: Key = Keys.secretKeyFor(SignatureAlgorithm.HS256)
 
-    fun createToken(primaryKey: String, roles: List<String>): String {
+    fun createToken(primaryKey: String, roles: List<String>): TokenResponseDto {
         val claims = Jwts.claims().setSubject(primaryKey)
         claims["roles"] = roles // claims.put("roles", roles)
         val now = Date()
+        val utcExpirationDate = Date(now.time + TOKEN_VALID_MILLISECOND)
 
-        return Jwts.builder()
+        return TokenResponseDto(Jwts.builder()
             .setClaims(claims)
             .setIssuedAt(now)
-            .setExpiration(Date(now.time + TOKEN_VALID_MILLISECOND))
+            .setExpiration(utcExpirationDate)
             .signWith(secretKey)
-            .compact()
+            .compact(),
+            utcExpirationDate
+        )
     }
 
     fun userPrimaryKey(token: String): String {
@@ -48,7 +52,7 @@ class JwtTokenProvider(
             userDetails, "", userDetails.authorities)
     }
 
-    fun resolveToken(request: HttpServletRequest): String {
+    fun resolveToken(request: HttpServletRequest): String? {
         return request.getHeader(HttpHeaders.AUTHORIZATION)
     }
 

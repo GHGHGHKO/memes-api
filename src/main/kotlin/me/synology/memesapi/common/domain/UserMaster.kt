@@ -23,7 +23,7 @@ class UserMaster(
     @Column(unique = true, length = 100)
     val email: String = email
 
-    @Column(length = 30)
+    @Column(length = 300)
     private var password: String = password
     override fun getPassword(): String = password
 

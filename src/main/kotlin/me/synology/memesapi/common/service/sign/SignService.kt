@@ -1,8 +1,12 @@
 package me.synology.memesapi.common.service.sign
 
+import me.synology.memesapi.common.advice.EmailSignInFailedExceptionCustom
 import me.synology.memesapi.common.advice.UserExistExceptionCustom
+import me.synology.memesapi.common.advice.UserNotFoundExceptionCustom
 import me.synology.memesapi.common.config.JwtTokenProvider
 import me.synology.memesapi.common.domain.UserMaster
+import me.synology.memesapi.common.dto.SignInRequestDto
+import me.synology.memesapi.common.dto.SignInResponseDto
 import me.synology.memesapi.common.dto.SignUpRequestDto
 import me.synology.memesapi.common.repository.UserMasterRepository
 import org.springframework.beans.factory.annotation.Value
@@ -28,11 +32,26 @@ class SignService(
         userMasterRepository.save(
             UserMaster(
                 email = signUpRequestDto.email,
-                password = signUpRequestDto.password,
+                password = passwordEncoder.encode(signUpRequestDto.password),
                 nickName = signUpRequestDto.nickname,
                 createUser = apiName,
                 updateUser = apiName
             )
+        )
+    }
+
+    fun signIn(signInRequestDto: SignInRequestDto): SignInResponseDto {
+        val user: UserMaster = userMasterRepository.findByEmail(signInRequestDto.email)
+            ?: throw UserNotFoundExceptionCustom()
+
+        if (!passwordEncoder.matches(signInRequestDto.password, user.password)) {
+            throw EmailSignInFailedExceptionCustom()
+        }
+
+        val jwtInfo = jwtTokenProvider.createToken(user.id.toString(), user.roles)
+
+        return SignInResponseDto(
+            jwtInfo.token, jwtInfo.expirationDate
         )
     }
 }
