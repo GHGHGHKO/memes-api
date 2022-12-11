@@ -5,3 +5,7 @@ spring:
   cloud:
     vault:
       enabled: false
+
+info:
+  api:
+    sign: sign

@@ -33,12 +33,22 @@ class ExceptionAdvice(
 
     @ExceptionHandler(value = [UserNotFoundExceptionCustom::class])
     @ResponseBody
-    fun userNotFoundException(request: HttpServletRequest): ResponseEntity<CommonResult> {
+    fun userNotFoundException(): ResponseEntity<CommonResult> {
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
             .body(responseService.failResult(
                 getMessage("userNotFound.code").toInt(),
                 getMessage("userNotFound.message")))
+    }
+
+    @ExceptionHandler(value = [UserExistExceptionCustom::class])
+    @ResponseBody
+    fun userExistException(): ResponseEntity<CommonResult> {
+        return ResponseEntity
+            .status(HttpStatus.CONFLICT)
+            .body(responseService.failResult(
+                getMessage("existingUser.code").toInt(),
+                getMessage("existingUser.message")))
     }
 
     private fun getMessage(code: String): String {
