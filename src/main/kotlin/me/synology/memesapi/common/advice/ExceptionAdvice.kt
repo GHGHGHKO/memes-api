@@ -31,6 +31,16 @@ class ExceptionAdvice(
                 getMessage("unKnown.message")))
     }
 
+    @ExceptionHandler(value = [UserNotFoundExceptionCustom::class])
+    @ResponseBody
+    fun userNotFoundException(request: HttpServletRequest): ResponseEntity<CommonResult> {
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(responseService.failResult(
+                getMessage("userNotFound.code").toInt(),
+                getMessage("userNotFound.message")))
+    }
+
     private fun getMessage(code: String): String {
         return messageSource.getMessage(code, null, LocaleContextHolder.getLocale())
     }
