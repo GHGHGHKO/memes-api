@@ -4,7 +4,7 @@ import javax.validation.constraints.Email
 
 data class SignUpRequestDto(
     @Email
-    val email: String,
-    val password: String,
-    val nickname: String
+    var email: String,
+    var password: String,
+    var nickname: String
     )
