@@ -84,6 +84,23 @@ internal class SignControllerTest(
     }
 
     @Test
+    fun `invalid email signUp`() {
+        val signUpRequestDto = SignUpRequestDto(
+            "goose-duckgmailcom",
+            "",
+            "duck")
+        mockMvc.perform(post("/sign/v1/signUp")
+            .content(objectMapper.writeValueAsString(signUpRequestDto))
+            .contentType(MediaType.APPLICATION_JSON))
+            .andDo(print())
+            .andExpect(status().is4xxClientError)
+            .andExpect(jsonPath("$.success").value(false))
+            .andExpect(jsonPath("$.code").value(-1006))
+            .andExpect(jsonPath("$.message").exists())
+            .andExpect(jsonPath("$.argumentsNotValid").isArray)
+    }
+
+    @Test
     fun signIn() {
     }
 }
