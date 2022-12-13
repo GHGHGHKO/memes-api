@@ -51,7 +51,7 @@ class SignService(
         val jwtInfo = jwtTokenProvider.createToken(user.id.toString(), user.roles)
 
         return SignInResponseDto(
-            jwtInfo.token, jwtInfo.expirationDate
+            jwtInfo.token, jwtInfo.utcExpirationDate
         )
     }
 }

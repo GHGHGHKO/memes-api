@@ -4,5 +4,5 @@ import java.util.Date
 
 data class TokenResponseDto(
     val token: String,
-    val expirationDate: Date
+    val utcExpirationDate: Date
 )
