@@ -1,7 +1,6 @@
 package me.synology.memesapi.common.config.security
 
 import io.jsonwebtoken.Jwts
-import org.springframework.http.HttpHeaders
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import java.util.Date
@@ -12,6 +11,7 @@ import io.jsonwebtoken.security.Keys
 import me.synology.memesapi.common.dto.jwt.TokenResponseDto
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.Transactional
 import java.security.Key
 
 @Component
@@ -45,6 +45,7 @@ class JwtTokenProvider(
             .subject
     }
 
+    @Transactional
     fun userAuthentication(token: String): Authentication {
         val userDetails = userDetailsService
             .loadUserByUsername(userPrimaryKey(token))
@@ -54,7 +55,7 @@ class JwtTokenProvider(
     }
 
     fun resolveToken(request: HttpServletRequest): String? {
-        return request.getHeader(HttpHeaders.AUTHORIZATION)
+        return request.getHeader("X-AUTH-TOKEN")
     }
 
     fun validateToken(jwtToken: String): Boolean {
