@@ -1,4 +1,4 @@
-package me.synology.memesapi.common.config
+package me.synology.memesapi.common.config.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

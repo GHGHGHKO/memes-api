@@ -3,7 +3,7 @@ package me.synology.memesapi.common.service.sign
 import me.synology.memesapi.common.advice.EmailSignInFailedExceptionCustom
 import me.synology.memesapi.common.advice.UserExistExceptionCustom
 import me.synology.memesapi.common.advice.UserNotFoundExceptionCustom
-import me.synology.memesapi.common.config.JwtTokenProvider
+import me.synology.memesapi.common.config.security.JwtTokenProvider
 import me.synology.memesapi.common.domain.UserMaster
 import me.synology.memesapi.common.dto.SignInRequestDto
 import me.synology.memesapi.common.dto.SignInResponseDto
@@ -17,7 +17,8 @@ import org.springframework.stereotype.Service
 class SignService(
     private val userMasterRepository: UserMasterRepository,
     private val passwordEncoder: PasswordEncoder,
-    private val jwtTokenProvider: JwtTokenProvider) {
+    private val jwtTokenProvider: JwtTokenProvider
+) {
 
     @Value("\${info.api.sign}")
     val apiName: String = ""

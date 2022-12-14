@@ -1,4 +1,4 @@
-package me.synology.memesapi.common.config
+package me.synology.memesapi.common.config.security
 
 import io.jsonwebtoken.Jwts
 import org.springframework.http.HttpHeaders

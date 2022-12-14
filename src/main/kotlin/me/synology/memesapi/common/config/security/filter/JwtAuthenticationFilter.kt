@@ -1,6 +1,6 @@
-package me.synology.memesapi.common.config.filter
+package me.synology.memesapi.common.config.security.filter
 
-import me.synology.memesapi.common.config.JwtTokenProvider
+import me.synology.memesapi.common.config.security.JwtTokenProvider
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.GenericFilterBean
 import javax.servlet.FilterChain

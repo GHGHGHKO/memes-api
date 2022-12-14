@@ -1,6 +1,6 @@
-package me.synology.memesapi.common.config
+package me.synology.memesapi.common.config.security
 
-import me.synology.memesapi.common.config.filter.JwtAuthenticationFilter
+import me.synology.memesapi.common.config.security.filter.JwtAuthenticationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.Customizer
@@ -14,7 +14,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 @Configuration
 class SecurityConfig(
-    private val jwtTokenProvider: JwtTokenProvider) {
+    private val jwtTokenProvider: JwtTokenProvider
+) {
 
     @Bean
     fun filterChain(httpSecurity: HttpSecurity
@@ -31,7 +32,8 @@ class SecurityConfig(
             .antMatchers("/users/**").hasRole("ADMIN")
             .anyRequest().hasRole("USER")
             .and()
-            .addFilterBefore(JwtAuthenticationFilter(jwtTokenProvider),
+            .addFilterBefore(
+                JwtAuthenticationFilter(jwtTokenProvider),
             UsernamePasswordAuthenticationFilter::class.java)
 
         return httpSecurity.build()
