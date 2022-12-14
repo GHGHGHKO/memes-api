@@ -7,6 +7,7 @@ import javax.persistence.CollectionTable
 import javax.persistence.Column
 import javax.persistence.ElementCollection
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.JoinColumn
 import javax.persistence.Table
 
@@ -18,6 +19,7 @@ class UserMaster(
     nickName: String,
     createUser: String,
     updateUser: String,
+    roles: MutableList<String>
 ) : BaseEntity(), UserDetails {
 
     @Column(unique = true, length = 100)
@@ -36,12 +38,12 @@ class UserMaster(
     @Column(length = 100)
     val updateUser: String = updateUser
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(
         name = "user_master_roles",
         joinColumns = [JoinColumn(name = "user_master_id")])
     @Column
-    val roles: MutableList<String> = mutableListOf()
+    val roles: MutableList<String> = roles
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return roles
             .map { _role -> SimpleGrantedAuthority(_role) }

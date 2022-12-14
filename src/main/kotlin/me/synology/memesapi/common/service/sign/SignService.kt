@@ -29,13 +29,17 @@ class SignService(
             throw UserExistExceptionCustom()
         }
 
+        val roles = mutableListOf<String>()
+        roles.add("ROLE_USER")
+
         userMasterRepository.save(
             UserMaster(
                 email = signUpRequestDto.email,
                 password = passwordEncoder.encode(signUpRequestDto.password),
                 nickName = signUpRequestDto.nickname,
                 createUser = apiName,
-                updateUser = apiName
+                updateUser = apiName,
+                roles = roles
             )
         )
     }
@@ -51,7 +55,7 @@ class SignService(
         val jwtInfo = jwtTokenProvider.createToken(user.id.toString(), user.roles)
 
         return SignInResponseDto(
-            jwtInfo.token, jwtInfo.utcExpirationDate
+            jwtInfo.token, jwtInfo.utcExpirationDate, user.roles
         )
     }
 }

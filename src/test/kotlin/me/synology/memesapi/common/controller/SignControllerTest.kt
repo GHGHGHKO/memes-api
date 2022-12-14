@@ -42,12 +42,16 @@ internal class SignControllerTest(
 
     @BeforeEach
     fun setUp() {
+        val roles = mutableListOf<String>()
+        roles.add("ROLE_USER")
+
         userMasterRepository.save(UserMaster(
             email = "goose-duck@gmail.com",
             password = passwordEncoder.encode("Honkhonk1122!"),
             nickName = "goose",
             createUser = "SignControllerTest",
-            updateUser = "SignControllerTest"
+            updateUser = "SignControllerTest",
+            roles = roles
         ))
     }
 
@@ -121,6 +125,7 @@ internal class SignControllerTest(
             .andExpect(jsonPath("$.data").exists())
             .andExpect(jsonPath("$.data.token").exists())
             .andExpect(jsonPath("$.data.utcExpirationDate").exists())
+            .andExpect(jsonPath("$.data.roles").isNotEmpty)
     }
 
     @Test

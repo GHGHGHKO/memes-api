@@ -20,7 +20,7 @@ class JwtTokenProvider(
 
     var secretKey: Key = Keys.secretKeyFor(SignatureAlgorithm.HS256)
 
-    fun createToken(primaryKey: String, roles: List<String>): TokenResponseDto {
+    fun createToken(primaryKey: String, roles: MutableList<String>): TokenResponseDto {
         val claims = Jwts.claims().setSubject(primaryKey)
         claims["roles"] = roles // claims.put("roles", roles)
         val now = Date()
@@ -32,7 +32,8 @@ class JwtTokenProvider(
             .setExpiration(utcExpirationDate)
             .signWith(secretKey)
             .compact(),
-            utcExpirationDate
+            utcExpirationDate,
+            roles
         )
     }
 
