@@ -33,6 +33,7 @@ extra["testcontainersVersion"] = "1.17.6"
 
 dependencies {
 	implementation("com.github.f4b6a3:ulid-creator:5.1.0")
+	implementation("com.squareup.okhttp:okhttp:2.7.5")
 	implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 	implementation("com.squareup.retrofit2:retrofit:2.9.0")
 	implementation("io.jsonwebtoken:jjwt-api:0.11.5")

@@ -9,3 +9,6 @@ spring:
 info:
   api:
     sign: sign
+
+tenor:
+  url: https://tenor.googleapis.com
