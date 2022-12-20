@@ -1,6 +1,7 @@
 package me.synology.memesapi.common.service
 
 import me.synology.memesapi.common.model.response.CommonResult
+import me.synology.memesapi.common.model.response.MutableListResult
 import me.synology.memesapi.common.model.response.SingleResult
 import me.synology.memesapi.common.model.response.ValidationCheckResult
 import org.springframework.stereotype.Service
@@ -31,5 +32,15 @@ class ResponseService {
             common.code,
             common.message,
             data)
+    }
+
+    fun <T> mutableListResult(results: MutableList<T>): MutableListResult<T> {
+        val common = successResult()
+        return MutableListResult(
+            common.success,
+            common.code,
+            common.message,
+            results
+        )
     }
 }
