@@ -4,6 +4,7 @@ import me.synology.memesapi.common.config.security.filter.JwtAuthenticationFilte
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.Customizer
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -34,6 +35,7 @@ class SecurityConfig(
             .and()
             .authorizeRequests()
             .antMatchers("/sign/*/signIn", "/sign/*/signUp").permitAll()
+            .antMatchers(HttpMethod.GET, "/healthCheck/*").permitAll()
             .antMatchers("/users/**").hasRole("ADMIN")
             .anyRequest().hasRole("USER")
             .and()
