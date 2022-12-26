@@ -14,7 +14,7 @@ class HealthCheckController(
 ) {
 
     @GetMapping
-    private fun healthCheck(): ResponseEntity<CommonResult> {
+    fun healthCheck(): ResponseEntity<CommonResult> {
         return ResponseEntity.ok()
             .body(responseService.successResult())
     }
