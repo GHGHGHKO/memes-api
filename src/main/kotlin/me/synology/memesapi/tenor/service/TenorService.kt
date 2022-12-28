@@ -1,6 +1,5 @@
 package me.synology.memesapi.tenor.service
 
-import me.synology.memesapi.common.advice.UserNotFoundExceptionCustom
 import me.synology.memesapi.tenor.`interface`.TenorApi
 import me.synology.memesapi.tenor.dto.ImplementSearchResponseDto
 import me.synology.memesapi.tenor.dto.SearchResponseDto
@@ -50,7 +49,7 @@ class TenorService(
                     .results.map {
                             results ->
                         val searchResponseDto = SearchResponseDto(
-                            results.id, results.title, results.mediaFormat,
+                            results.id, results.title, results.mediaFormats,
                             results.contentDescription, results.itemUrl)
                         searchResponse.add(searchResponseDto)
                 }
