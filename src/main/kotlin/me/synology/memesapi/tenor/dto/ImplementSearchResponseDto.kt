@@ -1,29 +1,27 @@
 package me.synology.memesapi.tenor.dto
 
+import com.google.gson.annotations.SerializedName
+
 data class ImplementSearchResponseDto(
-    val results: MutableList<Results>
+    @SerializedName("results") val results: MutableList<Results>
 )
 
 data class Results (
-    val id: String,
-    val title: String,
-    val mediaFormat: MediaFormat,
-    val contentDescription: String,
-    val itemUrl: String
+    @SerializedName("id") val id: String,
+    @SerializedName("title") val title: String,
+    @SerializedName("media_formats") val mediaFormats: MediaFormats,
+    @SerializedName("content_description") val contentDescription: String,
+    @SerializedName("itemurl") val itemUrl: String,
 )
 
-data class MediaFormat(
-    val mediumGif: MediumGif
+data class MediaFormats(
+    @SerializedName("tinygif") val tinyGif: TinyGif
 )
 
-data class MediumGif(
-    val common: Common
-)
-
-data class Common(
-    val url: String,
-    val duration: Int,
-    val preview: String,
-    val dims: List<Int>,
-    val size: Int
+data class TinyGif(
+    @SerializedName("url") val url: String,
+    @SerializedName("duration") val duration: Int,
+    @SerializedName("preview") val preview: String,
+    @SerializedName("dims") val dims: List<Int>,
+    @SerializedName("size") val size: Int,
 )
