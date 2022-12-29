@@ -70,5 +70,29 @@ internal class TenorControllerTest(
             .andExpect(jsonPath("$.success").value(true))
             .andExpect(jsonPath("$.code").value(0))
             .andExpect(jsonPath("$.message").exists())
+            .andExpect(jsonPath("$.results").isArray)
+    }
+
+    @Test
+    fun `weird search`() {
+        mockMvc.perform(get("/tenor/v1?search=excaertghdryh4ag5yited")
+            .header("X-AUTH-TOKEN", token))
+            .andDo(print())
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("$.success").value(true))
+            .andExpect(jsonPath("$.code").value(0))
+            .andExpect(jsonPath("$.message").exists())
+            .andExpect(jsonPath("$.results").isArray)
+    }
+
+    @Test
+    fun `search without token`() {
+        mockMvc.perform(get("/tenor/v1?search=hellopepe"))
+            .andDo(print())
+            .andExpect(status().isOk)
+            .andExpect(jsonPath("$.success").value(true))
+            .andExpect(jsonPath("$.code").value(0))
+            .andExpect(jsonPath("$.message").exists())
+            .andExpect(jsonPath("$.results").isArray)
     }
 }

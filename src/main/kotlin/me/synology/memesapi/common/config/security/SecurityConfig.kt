@@ -35,7 +35,7 @@ class SecurityConfig(
             .and()
             .authorizeRequests()
             .antMatchers("/sign/*/signIn", "/sign/*/signUp").permitAll()
-            .antMatchers(HttpMethod.GET, "/healthCheck/*").permitAll()
+            .antMatchers(HttpMethod.GET, "/healthCheck/*", "/tenor/*").permitAll()
             .antMatchers("/users/**").hasRole("ADMIN")
             .anyRequest().hasRole("USER")
             .and()
