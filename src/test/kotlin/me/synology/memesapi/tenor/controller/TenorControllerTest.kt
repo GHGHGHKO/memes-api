@@ -63,7 +63,7 @@ internal class TenorControllerTest(
 
     @Test
     fun search() {
-        mockMvc.perform(get("/tenor/v1/search?search=excited")
+        mockMvc.perform(get("/tenor/v1?search=excited")
             .header("X-AUTH-TOKEN", token))
             .andDo(print())
             .andExpect(status().isOk)

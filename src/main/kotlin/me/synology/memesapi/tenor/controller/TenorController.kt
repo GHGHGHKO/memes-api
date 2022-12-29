@@ -17,7 +17,7 @@ class TenorController(
     private val responseService: ResponseService
 ) {
 
-    @GetMapping("/search")
+    @GetMapping
     fun search(
         @RequestParam(required = true) search: String
     ): ResponseEntity<MutableListResult<SearchResponseDto>> {
